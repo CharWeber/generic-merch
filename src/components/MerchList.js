@@ -8,9 +8,12 @@ function MerchList(props){
     <React.Fragment>
       {props.mainMerchList.map((merch) => 
         <Merch
+          whenMerchClicked = {props.OnMerchSelection}
           title={merch.title}
           type={merch.type}
           quantity={merch.quantity}
+          id={merch.id}
+          key={merch.id}
         />
       )}
     </React.Fragment>
@@ -18,7 +21,8 @@ function MerchList(props){
 }
 
 MerchList.propTypes ={
-  mainMerchList: PropTypes.array
+  mainMerchList: PropTypes.array,
+  OnMerchSelection: PropTypes.func
 }
 
 

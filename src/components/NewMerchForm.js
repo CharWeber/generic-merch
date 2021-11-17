@@ -20,10 +20,12 @@ function NewMerchForm(props){
           name='title'
           placeholder='Merch Name?' />
           <br/>
-        <input
-          type='text'
-          name='type'
-          placeholder='Type of Merch?' />
+          <select name="type">
+          <option value="Clothing">Clothing</option>
+          <option value="Accesory">Accesories</option>
+          <option value="Music">Music</option>
+          <option value="Misc">Misc</option>
+        </select>
           <br/>
         <input
           type='number'

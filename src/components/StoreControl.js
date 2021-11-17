@@ -1,4 +1,5 @@
 import React from "react";
+import MerchDetail from "./MerchDetail";
 import MerchList from "./MerchList";
 import NewMerchForm from "./NewMerchForm";
 
@@ -9,13 +10,20 @@ class StoreControl extends React.Component{
     this.state = {
       formVisible: false,
       mainMerchList: [],
+      selectedMerch: null,
     };
   }
 
   handleClick = () => {
-    this.setState(prevState => ({
-      formVisible: !prevState.formVisible
-    }))
+    if (this.state.selectedMerch != null){
+      this.setState({selectedMerch: null})
+    }
+    else{
+      this.setState(prevState => ({
+        formVisible: !prevState.formVisible,
+        selectedMerch: null
+      }))
+    }
   }
 
   handleNewMerchFormSubmission = (newMerch) => {
@@ -25,18 +33,39 @@ class StoreControl extends React.Component{
       formVisible: false
     })
   }
+  
+  handleChangingSelectedMerch = (id) => {
+    const newSelectedMerch = this.state.mainMerchList.filter(merch => merch.id === id)[0];
+    this.setState({selectedMerch: newSelectedMerch});
+  }
+
+  handleDeleteMerch = (id) => {
+    const newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id);
+    this.setState({
+      mainMerchList: newMainMerchList,
+      selectedMerch: null
+    })
+  }
 
   render(){
     let currentlyVisibleState = null;
     let buttontext = null;
-    if (!this.state.formVisible){
-      currentlyVisibleState = <MerchList mainMerchList = {this.state.mainMerchList} />
+    if (this.state.selectedMerch != null){
+      currentlyVisibleState = <MerchDetail  
+      merch={this.state.selectedMerch}
+      onMerchDelete={this.handleDeleteMerch}
+      />
+      buttontext = "Return"
+    }else if (!this.state.formVisible){
+      currentlyVisibleState = <MerchList 
+      mainMerchList = {this.state.mainMerchList} 
+      OnMerchSelection={this.handleChangingSelectedMerch}/>
       buttontext = "Add Merch";
     }
     else if (this.state.formVisible){
       currentlyVisibleState = <NewMerchForm onNewMerchCreation={this.handleNewMerchFormSubmission}
       buttontext = "submit" />
-      buttontext = "return";
+      buttontext = "Return";
     }
     return(
       <React.Fragment>
