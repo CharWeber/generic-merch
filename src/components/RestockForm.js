@@ -16,7 +16,5 @@ function RestockForm(props){
 }
 
 
-RestockForm.propTypes = {
 
-}
 export default RestockForm
