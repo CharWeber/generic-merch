@@ -13,6 +13,7 @@ class StoreControl extends React.Component{
       mainMerchList: [],
       selectedMerch: null,
       editing: false,
+      dataLoaded: false,
     };
   }
 
@@ -64,9 +65,72 @@ class StoreControl extends React.Component{
     this.setState({editing: true})
   }
 
+  handleBuyMerch = (id) => {
+    let selectMerch = this.state.mainMerchList.filter(merch => merch.id === id);
+    selectMerch[0].quantity -= 1;
+    let newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id)
+      .concat(selectMerch);
+    this.setState({
+      mainMerchList: newMainMerchList,
+      selectedMerch: null,
+      editing: false
+    })
+  }
+
+  handleRestockMerch = (id, qty) => {
+    let selectMerch = this.state.mainMerchList.filter(merch => merch.id ===id);
+    selectMerch[0].quantity += qty;
+    let newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id)
+      .concat(selectMerch);
+    this.setState({
+      mainMerchList: newMainMerchList,
+      selectedMerch: null,
+      editing: false
+    })
+  }
+
+
   render(){
     let currentlyVisibleState = null;
     let buttontext = null;
+
+    if (!this.state.dataLoaded){
+      let newMainMerchList = [
+        {
+          title: 'T-Shirt',
+          type: 'Clothing',
+          quantity: 1,
+          id: '1',
+          key: '1'
+        },
+        {
+          title: 'Earrings',
+          type: 'Accesory',
+          quantity: 5,
+          id: '2',
+          key: '2'
+        },
+        {
+          title: 'Music CD',
+          type: 'Music',
+          quantity: 5,
+          id: '3',
+          key: '3'
+        },
+        {
+          title: 'Figurine Set',
+          type: 'Misc',
+          quantity: 5,
+          id: '4',
+          key: '4'
+        }]
+      this.setState({
+        mainMerchList: newMainMerchList,
+        dataLoaded: true
+      })
+    }
+
+
     if (this.state.editing){
       currentlyVisibleState = <EditMerch  
       merch={this.state.selectedMerch}
@@ -75,9 +139,11 @@ class StoreControl extends React.Component{
       buttontext = "Return"
     }else if (this.state.selectedMerch != null){
       currentlyVisibleState = <MerchDetail  
-      merch={this.state.selectedMerch}
+      merch={this.state.selectedMerch} 
+      onMerchBuy = {this.handleBuyMerch}
       onMerchDelete={this.handleDeleteMerch}
       onMerchEdit={this.handleEdit}
+      onMerchRestock={this.handleRestockMerch}
       />
       buttontext = "Return"
     }else if (!this.state.formVisible){

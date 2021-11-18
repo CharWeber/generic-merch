@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 
 function Merch(props){
   let MerchStyles= {};
+  let WarningStyle = {
+    color: 'red'
+  };
+  let Visible = null;
+
   if (props.type === 'Clothing'){
     MerchStyles = {
       margin: '10px',
@@ -34,18 +39,38 @@ function Merch(props){
       backgroundColor: '#D9A0FF',
       fontFamily: 'sans-serif',
       borderColor: 'black',
+    }
   }
+
+  if (props.quantity <= 0){
+    Visible =     
+    <React.Fragment>
+    <div onClick = {() => props.whenMerchClicked(props.id)}>
+      <div style={MerchStyles}>
+        <h3>{props.title}</h3>
+        <hr/>
+        <p>{props.type}</p>
+        <p style={WarningStyle}>OUT OF STOCK</p>
+      </div>
+    </div>
+  </React.Fragment>
+  }else{
+    Visible = 
+    <React.Fragment>
+    <div onClick = {() => props.whenMerchClicked(props.id)}>
+      <div style={MerchStyles}>
+        <h3>{props.title}</h3>
+        <hr/>
+        <p>{props.type}</p>
+        <p>in Stock: {props.quantity}</p>
+      </div>
+    </div>
+  </React.Fragment>
   }
+  
   return(
     <React.Fragment>
-      <div onClick = {() => props.whenMerchClicked(props.id)}>
-        <div style={MerchStyles}>
-          <h3>{props.title}</h3>
-          <hr/>
-          <p>{props.type}</p>
-          <p>in Stock: {props.quantity}</p>
-        </div>
-      </div>
+      {Visible}
     </React.Fragment>
   );
 }
