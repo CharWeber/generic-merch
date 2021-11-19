@@ -101,19 +101,22 @@ class StoreControl extends React.Component{
           type: 'Clothing',
           quantity: 1,
           id: '1',
-          key: '1'
+          key: '1',
+          imgSRC: 'https://picsum.photos/131'
         },
         {
           title: 'Earrings',
           type: 'Accesory',
           quantity: 5,
           id: '2',
-          key: '2'
+          key: '2',
+          imgSRC: 'https://picsum.photos/132'
         },
         {
           title: 'Music CD',
           type: 'Music',
           quantity: 5,
+          imgSRC: 'https://picsum.photos/133',
           id: '3',
           key: '3'
         },
@@ -122,7 +125,8 @@ class StoreControl extends React.Component{
           type: 'Misc',
           quantity: 5,
           id: '4',
-          key: '4'
+          key: '4',
+          imgSRC: 'https://picsum.photos/134'
         }]
       this.setState({
         mainMerchList: newMainMerchList,

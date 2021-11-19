@@ -14,6 +14,7 @@ function MerchList(props){
           quantity={merch.quantity}
           id={merch.id}
           key={merch.id}
+          imgSRC={merch.imgSRC}
         />
       )}
     </React.Fragment>

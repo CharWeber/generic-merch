@@ -10,7 +10,8 @@ function NewMerchForm(props){
       title: event.target.title.value,
       type: event.target.type.value,
       quantity: event.target.quantity.value,
-      id: v4()
+      id: v4(),
+      imgSRC:'https://picsum.photos/100'
     });
   }
   return(

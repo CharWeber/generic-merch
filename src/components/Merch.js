@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 
 function Merch(props){
   let MerchStyles= {};
+  let img = props.imgSRC;
+  let imgStyle = {
+    float: 'left'
+  }
   let WarningStyle = {
     color: 'red'
   };
@@ -47,6 +51,7 @@ function Merch(props){
     <React.Fragment>
     <div onClick = {() => props.whenMerchClicked(props.id)}>
       <div style={MerchStyles}>
+        <img style={imgStyle} src={props.imgSRC} alt="placeholder img"/>
         <h3>{props.title}</h3>
         <hr/>
         <p>{props.type}</p>
@@ -59,6 +64,7 @@ function Merch(props){
     <React.Fragment>
     <div onClick = {() => props.whenMerchClicked(props.id)}>
       <div style={MerchStyles}>
+      <img style={imgStyle} src={props.imgSRC} alt="placeholder img"/>
         <h3>{props.title}</h3>
         <hr/>
         <p>{props.type}</p>
@@ -67,10 +73,11 @@ function Merch(props){
     </div>
   </React.Fragment>
   }
-  
+  console.log(props);
   return(
     <React.Fragment>
       {Visible}
+      
     </React.Fragment>
   );
 }
@@ -81,7 +88,8 @@ Merch.propTypes ={
   type: PropTypes.string,
   quantity: PropTypes.number,
   id: PropTypes.string,
-  key: PropTypes.string
+  key: PropTypes.string,
+  imgSRC: PropTypes.string
 }
 
 export default Merch;
