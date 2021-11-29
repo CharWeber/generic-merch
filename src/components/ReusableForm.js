@@ -22,7 +22,7 @@ function ReusableForm(props){
           name='quantity'
           placeholder='how Many?' />
           <br/>
-        <button type='submit'>{props.buttontext}</button>
+        <button type='submit' className= "btn btn-light">{props.buttontext}</button>
       </form>
     </React.Fragment>
   );

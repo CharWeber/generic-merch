@@ -9,7 +9,7 @@ function RestockForm(props){
           name='qty'
           placeholder='How Many?' />
           <br/>
-        <button type='submit'>Restock</button>
+        <button type='submit' className= "btn btn-light">Restock</button>
       </form>
     </React.Fragment>
   );

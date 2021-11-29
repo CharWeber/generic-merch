@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 function MerchList(props){
   return(
     <React.Fragment>
-      {props.mainMerchList.map((merch) => 
+      {Object.values(props.mainMerchList).map((merch) => 
         <Merch
           whenMerchClicked = {props.OnMerchSelection}
           title={merch.title}
-          type={merch.type}
+          category={merch.category}
           quantity={merch.quantity}
           id={merch.id}
           key={merch.id}
@@ -22,7 +22,7 @@ function MerchList(props){
 }
 
 MerchList.propTypes ={
-  mainMerchList: PropTypes.array,
+  mainMerchList: PropTypes.object,
   OnMerchSelection: PropTypes.func
 }
 

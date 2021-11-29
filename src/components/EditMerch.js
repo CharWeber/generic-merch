@@ -8,7 +8,7 @@ function EditMerch(props){
     e.preventDefault();
     props.onEditMerch({
       title: e.target.title.value,
-      type: e.target.type.value,
+      category: e.target.category.value,
       quantity: e.target.quantity.value,
       id: merch.id})
   }

@@ -12,26 +12,26 @@ function Merch(props){
   };
   let Visible = null;
 
-  if (props.type === 'Clothing'){
+  if (props.category === 'Clothing'){
     MerchStyles = {
       margin: '10px',
-      padding: '5px',
+      padding: '25px',
       backgroundColor: '#DAFFA0',
       fontFamily: 'sans-serif',
       borderColor: 'black',
     }
-  }else if (props.type === 'Music'){
+  }else if (props.category === 'Music'){
     MerchStyles = {
       margin: '10px',
-      padding: '5px',
+      padding: '25px',
       backgroundColor: '#ffb1A0',
       fontFamily: 'sans-serif',
       borderColor: 'black',
     }
-  }else if (props.type === 'Accesory'){
+  }else if (props.category === 'Accesory'){
     MerchStyles = {
       margin: '10px',
-      padding: '5px',
+      padding: '25px',
       backgroundColor: '#A0FFCD',
       fontFamily: 'sans-serif',
       borderColor: 'black',
@@ -39,7 +39,7 @@ function Merch(props){
   }else {
     MerchStyles = {
       margin: '10px',
-      padding: '5px',
+      padding: '25px',
       backgroundColor: '#D9A0FF',
       fontFamily: 'sans-serif',
       borderColor: 'black',

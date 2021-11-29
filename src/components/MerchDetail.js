@@ -16,10 +16,10 @@ function MerchDetail(props){
     <React.Fragment>
       <h1>{merch.title}</h1>
       <br/>
-      <p>{merch.type}</p>
+      <p>{merch.category}</p>
       <p>OUT OF STOCK</p>
-      <button onClick={() => onMerchDelete(merch.id)}>Delete Merch</button>
-      <button onClick={() => onMerchEdit(merch.id)}>Update Merch</button>
+      <button onClick={() => onMerchDelete(merch.id)} className= "btn btn-light">Delete Merch</button>
+      <button onClick={() => onMerchEdit(merch.id)} className= "btn btn-light">Update Merch</button>
       <RestockForm formHandler={handleRestockForm}/>
     </React.Fragment>
   }else{
@@ -27,11 +27,11 @@ function MerchDetail(props){
     <React.Fragment>
       <h1>{merch.title}</h1>
       <br/>
-      <p>{merch.type}</p>
+      <p>{merch.category}</p>
       <p>{merch.quantity}</p>
-      <button onClick={() => onMerchDelete(merch.id)}>Delete Merch</button>
-      <button onClick={() => onMerchEdit(merch.id)}>Update Merch</button>
-      <button onClick={() => onMerchBuy(merch.id)}>Buy Merch</button>
+      <button onClick={() => onMerchDelete(merch.id)} className= "btn btn-light">Delete Merch</button>
+      <button onClick={() => onMerchEdit(merch.id)} className= "btn btn-light">Update Merch</button>
+      <button onClick={() => onMerchBuy(merch.id)} className= "btn btn-light">Buy Merch</button>
     </React.Fragment>
   }
   return (

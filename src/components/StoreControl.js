@@ -3,14 +3,16 @@ import MerchDetail from "./MerchDetail";
 import MerchList from "./MerchList";
 import NewMerchForm from "./NewMerchForm";
 import EditMerch from "./EditMerch";
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 class StoreControl extends React.Component{
 
   constructor(props){
     super(props);
+    console.log(props);
     this.state = {
       formVisible: false,
-      mainMerchList: [],
       selectedMerch: null,
       editing: false,
       dataLoaded: false,
@@ -31,62 +33,101 @@ class StoreControl extends React.Component{
   }
 
   handleNewMerchFormSubmission = (newMerch) => {
-    const newMainMerchList = this.state.mainMerchList.concat(newMerch);
+    const { dispatch } = this.props;
+    const { id, title, category, quantity, key, imgSRC } = newMerch;
+    const action = {
+      type: 'ADD_MERCH',
+      title: title,
+      category: category,
+      quantity: quantity,
+      id: id,
+      key: key,
+      imgSRC: imgSRC
+    }
+    dispatch(action);
     this.setState({
-      mainMerchList: newMainMerchList,
       formVisible: false
-    })
+    });
   }
   
   handleChangingSelectedMerch = (id) => {
-    const newSelectedMerch = this.state.mainMerchList.filter(merch => merch.id === id)[0];
-    this.setState({selectedMerch: newSelectedMerch});
+    const selectedMerch = this.props.mainMerchList[id];
+    this.setState({selectedMerch: selectedMerch});
   }
 
   handleDeleteMerch = (id) => {
-    const newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id);
-    this.setState({
-      mainMerchList: newMainMerchList,
-      selectedMerch: null
-    })
+    const {dispatch} = this.props;
+    const action = {
+      type: 'DELETE_MERCH',
+      id: id
+    }
+    dispatch(action);
+    this.setState({selectedMerch: null});
   }
 
   handleEditMerch = (merchToEdit) => {
-    const editedMainMerchList = this.state.mainMerchList
-    .filter(merch => merch.id !== this.state.selectedMerch.id)
-    .concat(merchToEdit);
+    const { dispatch } = this.props;
+    const { id, title, category, quantity, key, imgSRC } = merchToEdit;
+    const action = {
+      type: 'ADD_MERCH',
+      title: title,
+      category: category,
+      quantity: quantity,
+      id: id,
+      key: key,
+      imgSRC: imgSRC
+    }
+    dispatch(action);
     this.setState({
-      mainMerchList: editedMainMerchList,
       editing: false,
       selectedMerch: null
   });
   }
+
   handleEdit = ()=>{
     this.setState({editing: true})
   }
 
   handleBuyMerch = (id) => {
-    let selectMerch = this.state.mainMerchList.filter(merch => merch.id === id);
-    selectMerch[0].quantity -= 1;
-    let newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id)
-      .concat(selectMerch);
+    let selectMerch = this.props.mainMerchList[id]
+    selectMerch.quantity -= 1;
+    const { dispatch } = this.props;
+    const { title, category, quantity, key, imgSRC } = selectMerch;
+    const action = {
+      type: 'ADD_MERCH',
+      title: title,
+      category: category,
+      quantity: quantity,
+      id: id,
+      key: key,
+      imgSRC: imgSRC
+    }
+    dispatch(action);
     this.setState({
-      mainMerchList: newMainMerchList,
-      selectedMerch: null,
-      editing: false
-    })
+      editing: false,
+      selectedMerch: null
+  });
   }
 
   handleRestockMerch = (id, qty) => {
-    let selectMerch = this.state.mainMerchList.filter(merch => merch.id ===id);
-    selectMerch[0].quantity += qty;
-    let newMainMerchList = this.state.mainMerchList.filter(merch => merch.id !== id)
-      .concat(selectMerch);
+    let selectMerch = this.props.mainMerchList[id]
+    selectMerch.quantity += qty;
+    const { dispatch } = this.props;
+    const { title, category, quantity, key, imgSRC } = selectMerch;
+    const action = {
+      type: 'ADD_MERCH',
+      title: title,
+      category: category,
+      quantity: quantity,
+      id: id,
+      key: key,
+      imgSRC: imgSRC
+    }
+    dispatch(action);
     this.setState({
-      mainMerchList: newMainMerchList,
-      selectedMerch: null,
-      editing: false
-    })
+      editing: false,
+      selectedMerch: null
+  });
   }
 
 
@@ -95,8 +136,10 @@ class StoreControl extends React.Component{
     let buttontext = null;
 
     if (!this.state.dataLoaded){
-      let newMainMerchList = [
+      const {dispatch} = this.props;
+      const merchData = [
         {
+          type: 'ADD_MERCH',
           title: 'T-Shirt',
           category: 'Clothing',
           quantity: 1,
@@ -105,6 +148,7 @@ class StoreControl extends React.Component{
           imgSRC: 'https://picsum.photos/131'
         },
         {
+          type: 'ADD_MERCH',
           title: 'Earrings',
           category: 'Accesory',
           quantity: 5,
@@ -113,6 +157,7 @@ class StoreControl extends React.Component{
           imgSRC: 'https://picsum.photos/132'
         },
         {
+          type: 'ADD_MERCH',
           title: 'Music CD',
           category: 'Music',
           quantity: 5,
@@ -121,6 +166,7 @@ class StoreControl extends React.Component{
           key: '3'
         },
         {
+          type: 'ADD_MERCH',
           title: 'Figurine Set',
           category: 'Misc',
           quantity: 5,
@@ -128,8 +174,10 @@ class StoreControl extends React.Component{
           key: '4',
           imgSRC: 'https://picsum.photos/134'
         }]
+        merchData.forEach((action) => {
+          dispatch(action)
+        });
       this.setState({
-        mainMerchList: newMainMerchList,
         dataLoaded: true
       })
     }
@@ -152,7 +200,7 @@ class StoreControl extends React.Component{
       buttontext = "Return"
     }else if (!this.state.formVisible){
       currentlyVisibleState = <MerchList 
-      mainMerchList = {this.state.mainMerchList} 
+      mainMerchList = {this.props.mainMerchList} 
       OnMerchSelection={this.handleChangingSelectedMerch}
       />
       buttontext = "Add Merch";
@@ -165,10 +213,22 @@ class StoreControl extends React.Component{
     return(
       <React.Fragment>
       {currentlyVisibleState}
-      <button onClick={this.handleClick}>{buttontext}</button>
+      <button onClick={this.handleClick} class='btn btn-light'>{buttontext}</button>
       </React.Fragment>
     );
   }
 }
+
+StoreControl.propTypes = {
+  mainMerchList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    mainMerchList: state
+  }
+}
+
+StoreControl = connect(mapStateToProps)(StoreControl);
 
 export default StoreControl;

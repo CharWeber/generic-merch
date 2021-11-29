@@ -8,10 +8,10 @@ function NewMerchForm(props){
     event.preventDefault();
     props.onNewMerchCreation({
       title: event.target.title.value,
-      category: event.target.type.value,
+      category: event.target.category.value,
       quantity: event.target.quantity.value,
       id: v4(),
-      imgSRC:'https://picsum.photos/100'
+      imgSRC:'https://picsum.photos/130'
     });
   }
   return(
