@@ -51,10 +51,10 @@ function Merch(props){
     <React.Fragment>
     <div onClick = {() => props.whenMerchClicked(props.id)}>
       <div style={MerchStyles}>
-        <img style={imgStyle} src={props.imgSRC} alt="placeholder img"/>
+        <img style={imgStyle} src={img} alt="placeholder img"/>
         <h3>{props.title}</h3>
         <hr/>
-        <p>{props.type}</p>
+        <p>{props.category}</p>
         <p style={WarningStyle}>OUT OF STOCK</p>
       </div>
     </div>
@@ -64,10 +64,10 @@ function Merch(props){
     <React.Fragment>
     <div onClick = {() => props.whenMerchClicked(props.id)}>
       <div style={MerchStyles}>
-      <img style={imgStyle} src={props.imgSRC} alt="placeholder img"/>
+      <img style={imgStyle} src={img} alt="placeholder img"/>
         <h3>{props.title}</h3>
         <hr/>
-        <p>{props.type}</p>
+        <p>{props.category}</p>
         <p>in Stock: {props.quantity}</p>
       </div>
     </div>
@@ -85,7 +85,7 @@ function Merch(props){
 Merch.propTypes ={
   whenMerchClicked: PropTypes.func,
   title: PropTypes.string,
-  type: PropTypes.string,
+  category: PropTypes.string,
   quantity: PropTypes.number,
   id: PropTypes.string,
   key: PropTypes.string,

@@ -98,7 +98,7 @@ class StoreControl extends React.Component{
       let newMainMerchList = [
         {
           title: 'T-Shirt',
-          type: 'Clothing',
+          category: 'Clothing',
           quantity: 1,
           id: '1',
           key: '1',
@@ -106,7 +106,7 @@ class StoreControl extends React.Component{
         },
         {
           title: 'Earrings',
-          type: 'Accesory',
+          category: 'Accesory',
           quantity: 5,
           id: '2',
           key: '2',
@@ -114,7 +114,7 @@ class StoreControl extends React.Component{
         },
         {
           title: 'Music CD',
-          type: 'Music',
+          category: 'Music',
           quantity: 5,
           imgSRC: 'https://picsum.photos/133',
           id: '3',
@@ -122,7 +122,7 @@ class StoreControl extends React.Component{
         },
         {
           title: 'Figurine Set',
-          type: 'Misc',
+          category: 'Misc',
           quantity: 5,
           id: '4',
           key: '4',

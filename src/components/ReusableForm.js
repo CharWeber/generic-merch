@@ -10,7 +10,7 @@ function ReusableForm(props){
           name='title'
           placeholder='Merch Name?' />
           <br/>
-          <select name="type">
+          <select name="category">
           <option value="Clothing">Clothing</option>
           <option value="Accesory">Accesories</option>
           <option value="Music">Music</option>

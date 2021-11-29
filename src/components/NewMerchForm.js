@@ -8,7 +8,7 @@ function NewMerchForm(props){
     event.preventDefault();
     props.onNewMerchCreation({
       title: event.target.title.value,
-      type: event.target.type.value,
+      category: event.target.type.value,
       quantity: event.target.quantity.value,
       id: v4(),
       imgSRC:'https://picsum.photos/100'
